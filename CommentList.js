@@ -1,22 +1,20 @@
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { Text } from 'react-native'
 
-import useFetch from './useFetch'
+import ListView from './ListView'
 import Card from './Card'
 import Title from './Title'
 
 function CommentList() {
-  const comments = useFetch('/comments')
-
   return (
-    <ScrollView>
-      {comments.map(comment => (
+    <ListView url="/comments">
+      {comment => (
         <Card key={comment.id}>
           <Title>{comment.name}</Title>
           <Text>{comment.body}</Text>
         </Card>
-      ))}
-    </ScrollView>
+      )}
+    </ListView>
   )
 }
 

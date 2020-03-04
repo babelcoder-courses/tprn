@@ -1,22 +1,20 @@
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { Text } from 'react-native'
 
-import useFetch from './useFetch'
+import ListView from './ListView'
 import Card from './Card'
 import Title from './Title'
 
 function UserList() {
-  const users = useFetch('/users')
-
   return (
-    <ScrollView>
-      {users.map(user => (
+    <ListView url="/users">
+      {user => (
         <Card key={user.id}>
           <Title>{user.username}</Title>
           <Text>{user.name}</Text>
         </Card>
-      ))}
-    </ScrollView>
+      )}
+    </ListView>
   )
 }
 
