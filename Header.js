@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components/native'
 
+import I18nContext from './i18n'
 import Menu from './Menu'
 import MenuItem from './MenuItem'
 
@@ -9,14 +10,18 @@ const Container = styled.View`
 `
 
 export default function Header({ onChangeMenu }) {
+  const {
+    header: { posts, users, comments },
+  } = useContext(I18nContext)
+
   const changeMenu = screen => () => onChangeMenu(screen)
 
   return (
     <Container>
       <Menu>
-        <MenuItem title="Posts" onPress={changeMenu('posts')} />
-        <MenuItem title="Users" onPress={changeMenu('users')} />
-        <MenuItem title="Comments" onPress={changeMenu('comments')} />
+        <MenuItem title={posts} onPress={changeMenu('posts')} />
+        <MenuItem title={users} onPress={changeMenu('users')} />
+        <MenuItem title={comments} onPress={changeMenu('comments')} />
       </Menu>
     </Container>
   )

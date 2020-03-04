@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button } from 'react-native'
 import styled from 'styled-components/native'
 
-import ThemeContext, { theme } from './theme.js'
+import I18nContext, { i18n } from './i18n.js'
 import Header from './Header'
 import Content from './Content'
 
@@ -12,19 +12,18 @@ const Container = styled.SafeAreaView`
 `
 export default function App() {
   const [screen, setScreen] = useState('posts')
-  const [currentTheme, setCurrentTheme] = useState(theme.light)
+  const [currentLang, setCurrentLang] = useState(i18n.en)
 
-  const toggleTheme = () => {
-    setCurrentTheme(currentTheme === theme.light ? theme.dark : theme.light)
-  }
+  const changeLang = lang => () => setCurrentLang(i18n[lang])
 
   return (
-    <ThemeContext.Provider value={currentTheme}>
+    <I18nContext.Provider value={currentLang}>
       <Container>
-        <Button title="Toggle Theme" onPress={toggleTheme} />
+        <Button title="EN" onPress={changeLang('en')} />
+        <Button title="TH" onPress={changeLang('th')} />
         <Header onChangeMenu={setScreen} />
         <Content screen={screen} />
       </Container>
-    </ThemeContext.Provider>
+    </I18nContext.Provider>
   )
 }
