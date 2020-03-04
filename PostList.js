@@ -1,21 +1,25 @@
 import React from 'react'
 import { ScrollView, Text } from 'react-native'
 
-import withFetch from './withFetch'
+import Fetch from './Fetch'
 import Card from './Card'
 import Title from './Title'
 
-function PostList({ data }) {
+function PostList() {
   return (
-    <ScrollView>
-      {data.map(post => (
-        <Card key={post.id}>
-          <Title>{post.title}</Title>
-          <Text>{post.body}</Text>
-        </Card>
-      ))}
-    </ScrollView>
+    <Fetch url="/posts">
+      {posts => (
+        <ScrollView>
+          {posts.map(post => (
+            <Card key={post.id}>
+              <Title>{post.title}</Title>
+              <Text>{post.body}</Text>
+            </Card>
+          ))}
+        </ScrollView>
+      )}
+    </Fetch>
   )
 }
 
-export default withFetch('/posts')(PostList)
+export default PostList
