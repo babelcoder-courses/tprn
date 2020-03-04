@@ -1,24 +1,22 @@
 import React from 'react'
 import { ScrollView, Text } from 'react-native'
 
-import Fetch from './Fetch'
+import useFetch from './useFetch'
 import Card from './Card'
 import Title from './Title'
 
 function CommentList() {
+  const comments = useFetch('/comments')
+
   return (
-    <Fetch url="/comments">
-      {comments => (
-        <ScrollView>
-          {comments.map(comment => (
-            <Card key={comment.id}>
-              <Title>{comment.name}</Title>
-              <Text>{comment.body}</Text>
-            </Card>
-          ))}
-        </ScrollView>
-      )}
-    </Fetch>
+    <ScrollView>
+      {comments.map(comment => (
+        <Card key={comment.id}>
+          <Title>{comment.name}</Title>
+          <Text>{comment.body}</Text>
+        </Card>
+      ))}
+    </ScrollView>
   )
 }
 
