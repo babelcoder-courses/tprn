@@ -1,20 +1,33 @@
-import React, { useState } from 'react'
-import styled from 'styled-components/native'
+import React from 'react'
+import { SafeAreaView } from 'react-native'
+import * as yup from 'yup'
 
-import Header from './Header'
-import Content from './Content'
+import Form from './Form'
+import Input from './Input'
+import Submit from './Submit'
 
-const Container = styled.SafeAreaView`
-  background-color: #6c5ce7;
-  flex: 1;
-`
-export default function App() {
-  const [screen, setScreen] = useState('posts')
-
+function App() {
   return (
-    <Container>
-      <Header onChangeMenu={setScreen} />
-      <Content screen={screen} />
-    </Container>
+    <SafeAreaView>
+      <Form
+        initialValues={{
+          username: '',
+          email: 'a@a.com',
+        }}
+        schema={yup.object().shape({
+          username: yup.string().required(),
+          email: yup
+            .string()
+            .email('อีแมววว')
+            .required('ใส่มาดิ'),
+        })}
+        onSubmit={value => console.log(value)}>
+        <Input name="username" />
+        <Input name="email" />
+        <Submit>Submit</Submit>
+      </Form>
+    </SafeAreaView>
   )
 }
+
+export default App
