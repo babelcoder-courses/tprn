@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "modules/*": ["./src/modules/*"]
+    },
     "plugins": [
       {
         "name": "typescript-styled-plugin",
